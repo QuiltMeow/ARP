@@ -306,6 +306,10 @@ int main(int argc, const char* argv[]) {
         exit(EXIT_SUCCESS);
     } else if (strcmp(argv[1], "-l") == 0) {
         printf("[ ARP 收包模式 ]\n");
+        if (argc < 3) {
+            printf("請輸入收包條件\n");
+            exit(EXIT_FAILURE);
+        }
         if (strcmp(argv[2], "-a") == 0) {
             init(ADAPTER_NAME);
             pthread_create(&thread, NULL, ARPReceiveThread, "ARPReceiveThread");
@@ -321,6 +325,10 @@ int main(int argc, const char* argv[]) {
         }
     } else if (strcmp(argv[1], "-q") == 0) {
         printf("[ ARP 查詢模式 ]\n");
+        if (argc < 3) {
+            printf("請輸入 IP 位址\n");
+            exit(EXIT_FAILURE);
+        }
         inputIP = argv[2];
         if (!isValidIPv4Address(inputIP)) {
             errorExit("IP 位址輸入錯誤 ");
